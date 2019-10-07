@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/main.css' %}">
+<!DOCTYPE html>
+<html>
+<head>
+      <title> Microbit data</title>  
+</head>
+<body>
+    <h3>Summary microbit data</h3><br>
+    <button><a href="/individual" class="btn btn-default">Go to unique microbit</a></button>
+    <table>
+        <tr>
+            <th> {{ ' Mean Temperature' }} </th>
+            <th> {{ ' Mean Light' }} </th>
+        </tr> 
+        {% for table in tables %}
+            <tr>
+                <td> {{ table.temperatureMean }} </td>
+                <td> {{ table.lightMean }} </td>
+            </tr> 
+        {% endfor %}
+    </table>
+</body>
+</html>
