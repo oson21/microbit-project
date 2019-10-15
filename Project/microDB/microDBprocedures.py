@@ -1,12 +1,13 @@
 import mysql.connector
 from mysql.connector import Error
 
+
 # Globals to keep track on mean
 count = 0
 tempMean = 0.0
 lightMean = 0.0
 
-def insertVariablesIntomicrobit(temperature,light):
+def insertVariablesIntomicrobit(microbitID, temperature, light):
     try: 
         mydb = mysql.connector.connect(
                 host="localhost",
@@ -14,13 +15,14 @@ def insertVariablesIntomicrobit(temperature,light):
                 passwd="pass",
                 database="microb"
                 )
-
+        microbitIDString = str(microbitID)
         temperatureString = str(temperature)
         lightString = str(light)
+        
         cursor = mydb.cursor()
-        MySql_insert_query = """ INSERT INTO myapp_microbit(lastTemperatureReading,lastLightReading)
-                                VALUES ( %s, %s)"""
-        recordTuple = (temperatureString, lightString)
+        MySql_insert_query = """ INSERT INTO myapp_microbit(microbitID,lastTemperatureReading,lastLightReading)
+                                VALUES ( %s, %s, %s)"""
+        recordTuple = (microbitIDString, temperatureString, lightString)
         cursor.execute(MySql_insert_query,recordTuple)
         mydb.commit()
         print("insertion into microbit was successful")
@@ -34,7 +36,7 @@ def insertVariablesIntomicrobit(temperature,light):
             mydb.close()
             print("MySQL connection is closed")
 
-def insertVariablesIntomicrobitsummary(temperature,light):
+def insertVariablesIntomicrobitsummary(numberOfmicrobits, temperature, light):
     #writing them global here to be able to modify them in function
     global count
     global tempMean
@@ -63,9 +65,9 @@ def insertVariablesIntomicrobitsummary(temperature,light):
                 )
     
         cursor = mydb.cursor()
-        MySql_insert_query = """ INSERT INTO myapp_microbitsummary(temperatureMean,lightMean)
-                                VALUES ( %s, %s)"""
-        recordTuple = (tempMeanString, lightMeanString)
+        MySql_insert_query = """ INSERT INTO myapp_microbitsummary(numberOfMicrobits, temperatureMean, lightMean)
+                                VALUES (%s, %s, %s)"""
+        recordTuple = (numberOfmicrobits, tempMeanString, lightMeanString)
         cursor.execute(MySql_insert_query,recordTuple)
         mydb.commit()
         print("insertion into microbitsummary was successful")

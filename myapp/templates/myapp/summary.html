@@ -10,13 +10,18 @@
     <button><a href="/individual" class="btn btn-default">Go to unique microbit</a></button>
     <table>
         <tr>
+            <th> {{ ' Time' }} </th>
             <th> {{ ' Mean Temperature' }} </th>
             <th> {{ ' Mean Light' }} </th>
+            <th> {{ ' Number of microbits ' }} </th>
         </tr> 
         {% for table in tables %}
             <tr>
+                <td> {{ table.timeOfReading }} </td>
                 <td> {{ table.temperatureMean }} </td>
                 <td> {{ table.lightMean }} </td>
+                <td> {{ table.numberOfMicrobits}} </td>
+
             </tr> 
         {% endfor %}
     </table>

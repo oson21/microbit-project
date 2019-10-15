@@ -14,8 +14,13 @@ while True:
     temp = str(temperature())
     # Light meassure
     lightLevel = str(display.read_light_level())
+    #setting unique id for specific microbit
+    microbitID = "3"
+    #showing id number on microbit
+    display.show(microbitID)
+
     #  message of temperature and light
-    message = temp + ',' + lightLevel
+    message = microbitID + ',' + temp + ',' + lightLevel
     #Send temperature and light 
     radio.send(message)  # a-ha
 

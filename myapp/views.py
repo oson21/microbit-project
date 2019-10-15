@@ -1,11 +1,7 @@
 from django.shortcuts import render
 from .models import microbit, microbitsummary
-# Create your views here
 
-tables = [
-    {
-    },
-]
+# Create your views here
 
 def summary(request):
     context = {

@@ -1,1 +1,50 @@
-wallabaja
+Basic requirements
+
+IRL microbit packages (atleast 2)
+
+Python
+    -pip
+        -django
+        -mysql.connector
+        -pyserial
+
+Visual studio code
+extentions:
+    -Python
+    -pip-packages
+    -micro:bit
+
+mysql
+
+
+To run the system:
+    1- install all the needed program and packages
+    
+    2- write "python manage.py migrate" in terminal in microb_project directory
+    
+    3- write "python manage.py makemigrations" in terminal in microb_project directory
+    
+    4- Make sure that the information in microbit.cnf matches your settings in mysql(Or use default)
+    
+    5- Make sure that the information in Project/microDB/microDBprocedures.py matches your settings in mysql(Or use default)
+    
+    6- Run all the code in the SQL_modify_DB.(If used default fot step 4, 5). Otherwise start underneath "use microB", execute the rest of the code
+        that follows.
+    
+    7- In the microb_project directory, go to Project/microbit_code where you use micro:bit package to install
+        the reciever microbit and all the sender microbits you want (be aware that you have to change microbitID
+        manually for every sender microbit start with 1 and continue with 2, 3, 4 etc. to be sure that the system
+        knows how many microbits are in the system. Also be aware that you cannot remove microbits when the system
+        is running then counter of numberOfMicrobits in the system will not be correct). Also adjust the sleep function at line 10
+        after your own preferences, to send data more or less often. Default is set to send every 10000 milliseconds. Make sure that you do not
+        send data at the same time, you need atleast 2 second between the sending of data from the different microbits to be safe.
+
+    8- In microDB directory open microbitDataToDB.py and make sure that "ser = serial.Serial('COM4')" is listening
+        on the USB-port where the microbit reciever. Change 'COM4' to the correct USB-port in your system.
+    
+    9- Run microbitDataToDB.py when you have plugged in the reciever microbit and start sender microbits.
+
+    10- In terminal write python manage.py runserver, and you have a localhost running at 8000.
+
+    11- Go to a browser and type localhost:8000 and check your data getting uploaded. You have to refresh everytime you want new feeds.
+    
